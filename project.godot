@@ -8,16 +8,6 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "RigidDynamicBody3D",
-"class": &"Sliceable",
-"language": &"GDScript",
-"path": "res://sliceable.gd"
-}]
-_global_script_class_icons={
-"Sliceable": ""
-}
-
 [application]
 
 config/name="voro_test"
