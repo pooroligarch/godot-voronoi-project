@@ -15,7 +15,7 @@ func _ready():
 	slice()
 
 func slice():
-	var meshinstance = $MeshInstance
+	var meshinstance = $MeshInstance3D
 	var voro = Voronoi.new()
 	var bounds = meshinstance.get_transformed_aabb()
 	
@@ -33,7 +33,7 @@ func slice():
 	#var face = PackedVector3Array()
 	
 	while !file.eof_reached():
-		var mesh = $MeshInstance.duplicate()
+		var mesh = $MeshInstance3D.duplicate()
 		var body = RigidDynamicBody3D.new()
 		
 		var line = file.get_line()

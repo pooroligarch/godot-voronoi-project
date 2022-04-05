@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwwkcb6t45hjh"]
+
+[ext_resource type="Script" path="res://Cube2.gd" id="1_youx1"]
+[ext_resource type="ArrayMesh" uid="uid://dtaa51dvrhryj" path="res://cube.obj" id="2_2bpni"]
+[ext_resource type="PackedScene" uid="uid://c4bjs86xwj16h" path="res://Camera.tscn" id="3_u10bi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41rhg"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5fb4p"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_433y6"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltug5"]
+sky_top_color = Color(0.12549, 0.509804, 0.760784, 1)
+
+[sub_resource type="Sky" id="Sky_5oujr"]
+sky_material = SubResource( "ProceduralSkyMaterial_ltug5" )
+
+[sub_resource type="Environment" id="Environment_43ran"]
+background_mode = 2
+background_energy = 1.23
+sky = SubResource( "Sky_5oujr" )
+
+[node name="World" type="Node3D"]
+
+[node name="Cube" type="CharacterBody3D" parent="."]
+script = ExtResource( "1_youx1" )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cube"]
+mesh = ExtResource( "2_2bpni" )
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube"]
+shape = SubResource( "BoxShape3D_41rhg" )
+
+[node name="Camera" parent="." instance=ExtResource( "3_u10bi" )]
+transform = Transform3D(0.840372, 0.0930576, -0.533961, -0.0255154, 0.990851, 0.132526, 0.541409, -0.097747, 0.835058, -6.60542, 2.70761, 8.16952)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.47551, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource( "BoxMesh_5fb4p" )
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource( "BoxShape3D_433y6" )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "Environment_43ran" )
