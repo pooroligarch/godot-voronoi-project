@@ -1,14 +1,14 @@
 extends CharacterBody3D
 
-func random_points_in_box(amount: int, bounds: AABB, p_seed := "", margin: float = 0.001):
+func random_points_in_box(amount: int, start: Vector3, end: Vector3, p_seed := "", margin: float = 0.001):
 	if p_seed != "":
 		seed(hash(p_seed))
 	var array = PackedVector3Array()
 	for i in range(amount):
 		array.append(Vector3(
-		randf_range(bounds.position.x - margin, bounds.end.x + margin),
-		randf_range(bounds.position.y - margin, bounds.end.y + margin),
-		randf_range(bounds.position.z - margin, bounds.end.z + margin)))
+		randf_range(start.x - margin, end.x + margin),
+		randf_range(start.y - margin, end.y + margin),
+		randf_range(start.z - margin, end.z + margin)))
 	return array
 	
 func _ready():
@@ -17,10 +17,10 @@ func _ready():
 func slice():
 	var meshinstance = $MeshInstance3D
 	var voro = Voronoi.new()
-	var bounds = meshinstance.get_transformed_aabb()
+	var bounds = meshinstance.get_aabb()
 	
 	voro.setup(bounds.position, bounds.end)
-	voro.set_points(random_points_in_box(10, bounds))
+	voro.set_points(random_points_in_box(10, bounds.position + position, bounds.end + position))
 	voro.compute()
 #	var face1 = voro.get_face(0, 0)
 #	var face2 = voro.get_face(0, 1)
