@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwwkcb6t45hjh"]
+[gd_scene load_steps=12 format=3 uid="uid://dwwkcb6t45hjh"]
 
 [ext_resource type="Script" path="res://Cube2.gd" id="1_youx1"]
 [ext_resource type="ArrayMesh" uid="uid://dtaa51dvrhryj" path="res://cube.obj" id="2_2bpni"]
 [ext_resource type="PackedScene" uid="uid://c4bjs86xwj16h" path="res://Camera.tscn" id="3_u10bi"]
+[ext_resource type="ArrayMesh" uid="uid://dvgwh6whd1qvq" path="res://sphere.obj" id="4_s3wu3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_41rhg"]
 size = Vector3(2, 2, 2)
@@ -23,6 +24,8 @@ sky_material = SubResource( "ProceduralSkyMaterial_ltug5" )
 background_mode = 2
 background_energy = 1.23
 sky = SubResource( "Sky_5oujr" )
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ivipp"]
 
 [node name="World" type="Node3D"]
 
@@ -50,3 +53,13 @@ shape = SubResource( "BoxShape3D_433y6" )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( "Environment_43ran" )
+
+[node name="Sphere" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08313, 0, 0)
+script = ExtResource( "1_youx1" )
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere"]
+shape = SubResource( "SphereShape3D_ivipp" )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sphere"]
+mesh = ExtResource( "4_s3wu3" )
